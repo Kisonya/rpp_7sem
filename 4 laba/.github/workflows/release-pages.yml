@@ -1,0 +1,44 @@
+name: Publish release to GitHub Pages (versioned)
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source at release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Compute release folder segment (v<name|tag>)
+        id: rel
+        run: |
+          NAME="${{ github.event.release.name }}"
+          TAG="${{ github.event.release.tag_name }}"
+          BASE="$NAME"
+          if [ -z "$BASE" ]; then BASE="$TAG"; fi
+          if [ -z "$BASE" ]; then BASE="0.0.0"; fi
+          if [[ "$BASE" =~ ^v ]]; then SEG="$BASE"; else SEG="v$BASE"; fi
+          echo "segment=$SEG" >> $GITHUB_OUTPUT
+
+      - name: Prepare publish directory
+        run: |
+          mkdir -p public
+          cp -R ru en index.html public/
+
+      - name: Deploy to gh-pages under /<repo>/${{ steps.rel.outputs.segment }}/
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: public
+          destination_dir: ${{ github.event.repository.name }}/${{ steps.rel.outputs.segment }}
+          keep_files: true
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
