@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <style>
+        /* Общие стили оформления */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* Белый блок формы в центре */
+        form {
+            display: inline-block;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Поля ввода */
+        input {
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        /* Кнопка регистрации */
+        button {
+            display: block;
+            width: 270px;
+            margin: 15px auto 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Эффект при наведении */
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Ссылка на вход */
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Стиль текста ошибки (например, если email уже существует) */
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма отправляет данные методом POST на эндпоинт /signup -->
+    <form action="{{ url_for('signup_post') }}" method="POST">
+        <h2>Регистрация</h2>
+
+        <!-- Поля ввода -->
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+
+        <!-- Кнопка регистрации -->
+        <button type="submit">Зарегистрироваться</button>
+
+        <!-- Ссылка на страницу входа -->
+        <a href="{{ url_for('login') }}">Уже есть аккаунт?</a>
+
+        <!-- Отображение сообщений об ошибках -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <p class="error">{{ messages[0] }}</p>
+            {% endif %}
+        {% endwith %}
+    </form>
+</body>
+</html>

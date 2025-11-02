@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная №5 — Авторизация Flask</title>
+    <style>
+        /* Общий стиль оформления страницы */
+        body {
+            font-family: Arial, sans-serif; /* шрифт */
+            text-align: center; /* выравнивание по центру */
+            background-color: #f2f2f2; /* светло-серый фон */
+            margin-top: 100px; /* отступ сверху */
+        }
+
+        /* Основной контейнер (белый блок в центре) */
+        .container {
+            background: white; /* фон блока */
+            padding: 30px; /* внутренние отступы */
+            border-radius: 10px; /* скруглённые углы */
+            display: inline-block; /* чтобы блок занимал только нужную ширину */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* лёгкая тень */
+        }
+
+        /* Стиль для ссылки "Выйти" */
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Основной блок с приветствием -->
+    <div class="container">
+        <!-- Переменная {{ user.name }} подставляется Flask автоматически -->
+        <h1>Добро пожаловать, {{ user.name }}!</h1>
+
+        <!-- Краткое описание лабораторной -->
+        <p>
+            <b>Лабораторная работа №5</b><br>
+            Тема: Авторизация и регистрация с помощью Flask
+        </p>
+
+        <!-- Ссылка на выход из аккаунта -->
+        <a href="{{ url_for('logout') }}">Выйти</a>
+    </div>
+</body>
+</html>

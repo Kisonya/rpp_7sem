@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <style>
+        /* Стиль страницы */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* Оформление формы входа */
+        form {
+            display: inline-block;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Поля ввода (email, пароль) */
+        input {
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+            padding: 10px;
+        }
+
+        /* Кнопка отправки */
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Ссылка на регистрацию */
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма отправляет данные методом POST на эндпоинт /login -->
+    <form action="{{ url_for('login_post') }}" method="POST">
+        <h2>Вход</h2>
+
+        <!-- Поля формы -->
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+
+        <!-- Кнопка входа -->
+        <button type="submit">Войти</button>
+
+        <!-- Ссылка на регистрацию -->
+        <a href="{{ url_for('signup') }}">Регистрация</a>
+    </form>
+
+    <!-- Отображение сообщений об ошибках (если неверный пароль или пользователь не найден) -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p style="color:red;">{{ messages[0] }}</p>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
