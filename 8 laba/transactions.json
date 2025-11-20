@@ -1,0 +1,187 @@
+[
+    {
+        "timestamp": "2025-11-20T14:41:54.243114",
+        "category": "food",
+        "amount": 4335.84
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243187",
+        "category": "transport",
+        "amount": 4564.37
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243203",
+        "category": "health",
+        "amount": 3602.84
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243215",
+        "category": "food",
+        "amount": 1104.07
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243225",
+        "category": "entertainment",
+        "amount": 3765.21
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243233",
+        "category": "transport",
+        "amount": 1702.28
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243241",
+        "category": "shopping",
+        "amount": 3307.15
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243249",
+        "category": "shopping",
+        "amount": 391.42
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243257",
+        "category": "health",
+        "amount": 626.64
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.243265",
+        "category": "food",
+        "amount": 4397.01
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245855",
+        "category": "entertainment",
+        "amount": 3845.48
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245895",
+        "category": "shopping",
+        "amount": 1516.71
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245914",
+        "category": "entertainment",
+        "amount": 3572.31
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245929",
+        "category": "entertainment",
+        "amount": 3835.93
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245943",
+        "category": "entertainment",
+        "amount": 3408.41
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245956",
+        "category": "food",
+        "amount": 4630.74
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245970",
+        "category": "food",
+        "amount": 1645.49
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245982",
+        "category": "transport",
+        "amount": 3957.44
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.245995",
+        "category": "shopping",
+        "amount": 3987.32
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.246009",
+        "category": "health",
+        "amount": 3434.78
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284202",
+        "category": "entertainment",
+        "amount": 1841.93
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284348",
+        "category": "shopping",
+        "amount": 3519.35
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284373",
+        "category": "food",
+        "amount": 347.12
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284390",
+        "category": "shopping",
+        "amount": 2472.48
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284405",
+        "category": "entertainment",
+        "amount": 2726.64
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284420",
+        "category": "health",
+        "amount": 4830.13
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284434",
+        "category": "transport",
+        "amount": 357.45
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284448",
+        "category": "shopping",
+        "amount": 2293.76
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284460",
+        "category": "health",
+        "amount": 842.51
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.284485",
+        "category": "entertainment",
+        "amount": 1029.56
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312667",
+        "category": "food",
+        "amount": 964.05
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312712",
+        "category": "entertainment",
+        "amount": 2482.52
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312732",
+        "category": "transport",
+        "amount": 107.03
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312751",
+        "category": "food",
+        "amount": 2165.39
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312767",
+        "category": "shopping",
+        "amount": 653.14
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312783",
+        "category": "entertainment",
+        "amount": 799.19
+    },
+    {
+        "timestamp": "2025-11-20T14:41:54.312797",
+        "category": "entertainment",
+        "amount": 2576.34
+    }
+]
