@@ -1,65 +1,78 @@
-import asyncio
-import json
-import random
-import time
-from datetime import datetime
-from pathlib import Path
+# Импортируем необходимые библиотеки
+import asyncio  # Для асинхронного выполнения задач
+import json  # Для работы с форматом JSON
+import random  # Для генерации случайных данных
+import time  # Для работы со временем (не используется напрямую, но может понадобиться)
+from datetime import datetime  # Для получения текущего времени
+from pathlib import Path  # Для работы с путями к файлам
 
-CATEGORIES = ["food", "transport", "entertainment", "shopping", "health"]
+# Задаём список категорий для транзакций
+CATEGORIES = ["еда", "транспорт", "развлечения", "шоппинг", "здоровье"]
 
-
+# Функция для генерации одной транзакции
 async def generate_transaction():
-    """Генерирует одну транзакцию"""
-    await asyncio.sleep(0)  # имитация реактивного стиля
+    # Задержка для асинхронного выполнения (имитация выполнения асинхронной задачи)
+    await asyncio.sleep(0)
+    
+    # Возвращаем транзакцию с текущей временной меткой, случайной категорией и случайной суммой
     return {
-        "timestamp": datetime.now().isoformat(),
-        "category": random.choice(CATEGORIES),
-        "amount": round(random.uniform(50, 5000), 2)
+        "timestamp": datetime.now().isoformat(),  # Текущее время в формате ISO
+        "category": random.choice(CATEGORIES),  # Случайно выбираем категорию из списка
+        "amount": round(random.uniform(50, 5000), 2)  # Генерируем случайную сумму от 50 до 5000 с двумя знаками после запятой
     }
 
-
+# Функция для генерации партии транзакций
 async def generate_batch(batch_size: int):
-    """Генерирует пачку транзакций"""
-    return [await generate_transaction() for _ in range(batch_size)]
+    # Генерируем заданное количество транзакций (batch_size)
+    return [await generate_transaction() for _ in range(batch_size)]  # Генерация списка из batch_size транзакций
 
-
+# Функция для сохранения пачки транзакций в файл
 async def save_batch(batch, batch_number):
-    """Сохраняет пачку транзакций"""
+    # Задаём путь к файлу, где будут храниться транзакции
     filename = Path("transactions.json")
-
-    # если файла нет — создаём пустой массив
+    
+    # Если файл не существует, создаём пустой файл с пустым массивом
     if not filename.exists():
         with open(filename, "w", encoding="utf-8") as f:
-            json.dump([], f)
-
-    # читаем существующий файл
+            json.dump([], f)  # Записываем пустой список в файл
+    
+    # Читаем уже существующие данные из файла
     with open(filename, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    # добавляем новые записи
+        data = json.load(f)  # Загружаем данные в формате JSON
+    
+    # Добавляем новые транзакции к существующим
     data.extend(batch)
-
-    # сохраняем
+    
+    # Сохраняем обновлённый список транзакций в файл
     with open(filename, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+        json.dump(data, f, indent=4)  # Сохраняем данные в формате JSON с отступами для читаемости
+    
+    # Выводим сообщение о том, сколько записей было добавлено
+    print(f"[ИНФО] Сохранена пачка #{batch_number} — {len(batch)} записей")
 
-    print(f"[INFO] Сохранена пачка #{batch_number} — {len(batch)} записей")
-
-
+# Главная функция, которая управляет всей логикой
 async def main():
+    # Запрашиваем у пользователя количество транзакций, которые нужно сгенерировать
     n = int(input("Введите количество транзакций: "))
+    
+    # Устанавливаем размер пачки — 10 транзакций в одну партию
     batch_size = 10
-
-    total_batches = (n + batch_size - 1) // batch_size
-    batch_number = 1
-
+    
+    # Вычисляем, сколько всего пачек нужно создать
+    total_batches = (n + batch_size - 1) // batch_size  # Округление вверх для получения количества пачек
+    batch_number = 1  # Номер текущей пачки, начиная с 1
+    
+    # Генерируем и сохраняем транзакции партиями
     for i in range(0, n, batch_size):
-        batch = await generate_batch(min(batch_size, n - i))
+        # Генерируем пачку транзакций
+        batch = await generate_batch(min(batch_size, n - i))  # Генерируем до 10 транзакций, если осталось меньше
+        # Сохраняем текущую пачку
         await save_batch(batch, batch_number)
-        batch_number += 1
+        batch_number += 1  # Увеличиваем номер пачки на 1
+    
+    # Сообщаем, что генерация завершена
+    print("\nГенерация завершена. Файл сохранён как transactions.json")
 
-    print("\nГенерация завершена. Файл: transactions.json")
-
-
+# Если скрипт запускается напрямую, вызываем главную функцию
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())  # Запускаем главную асинхронную функцию

@@ -1,57 +1,69 @@
-import asyncio
-import json
+# Импортируем необходимые библиотеки
+import asyncio  # Для асинхронного выполнения задач
+import json  # Для работы с форматом JSON
 
+# Задаём лимиты для категорий расходов
 LIMITS = {
-    "food": 10000,
-    "transport": 5000,
-    "entertainment": 8000,
-    "shopping": 15000,
-    "health": 12000
+    "еда": 50000,  # Лимит для категории "еда"
+    "транспорт": 20000,  # Лимит для категории "транспорт"
+    "развлечения": 25000,  # Лимит для категории "развлечения"
+    "шоппинг": 50000,  # Лимит для категории "шоппинг"
+    "здоровье": 30000  # Лимит для категории "здоровье"
 }
 
-
+# Функция для загрузки транзакций из файла
 async def load_transactions():
-    """Загружает транзакции из файла"""
-    await asyncio.sleep(0)
+    await asyncio.sleep(0)  # Асинхронная задержка (имитация асинхронного выполнения)
+    
+    # Открываем файл для чтения и загружаем данные в формате JSON
     with open("transactions.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f)  # Возвращаем данные из файла в виде списка
 
-
+# Функция для обработки одной транзакции
 async def process_transaction(transaction, result_dict):
-    """Обрабатывает одну транзакцию"""
-    await asyncio.sleep(0)
-
+    await asyncio.sleep(0)  # Асинхронная задержка для имитации работы
+    
+    # Извлекаем категорию и сумму транзакции
     cat = transaction["category"]
     amount = transaction["amount"]
+    
+    # Добавляем сумму к соответствующей категории в словарь
+    result_dict[cat] = result_dict.get(cat, 0) + amount  # Если категория уже есть, добавляем сумму
 
-    result_dict[cat] = result_dict.get(cat, 0) + amount
-
-
+# Функция для проверки лимитов
 async def check_limits(result_dict):
-    """Печатает превышение лимитов расходов"""
-    print("\n=== Проверка лимитов ===")
-
+    # Проходим по всем категориям и проверяем, не превышены ли лимиты
     for category, total in result_dict.items():
-        limit = LIMITS.get(category, None)
-        if limit and total > limit:
-            print(f"[ALERT] Категория '{category}' превысила лимит! {total:.2f} / {limit}")
+        limit = LIMITS.get(category, None)  # Получаем лимит для текущей категории
+        if limit and total > limit:  # Если лимит существует и сумма превышает лимит
+            # Выводим предупреждение о превышении лимита
+            print(f"[ПРЕДУПРЕЖДЕНИЕ] Категория '{category}' превысила лимит! {total:.2f} / {limit}")
         else:
-            print(f"[OK] {category}: {total:.2f}")
+            # Выводим сообщение, что лимит не превышен
+            print(f"[ОК] {category}: {total:.2f}")
 
-
+# Главная функция, которая управляет всей логикой
 async def main():
+    # Загружаем транзакции из файла
     transactions = await load_transactions()
+    
+    # Создаём пустой словарь для хранения суммы по каждой категории
     result = {}
-
+    
+    # Создаём список задач для обработки всех транзакций
     tasks = [process_transaction(t, result) for t in transactions]
+    
+    # Выполняем все задачи асинхронно
     await asyncio.gather(*tasks)
-
+    
+    # Выводим результаты по категориям
     print("\nРезультаты по категориям:")
     for k, v in result.items():
         print(f"{k}: {v:.2f}")
-
+    
+    # Проверяем лимиты по категориям
     await check_limits(result)
 
-
+# Если скрипт запускается напрямую, вызываем главную функцию
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())  # Запускаем главную асинхронную функцию
